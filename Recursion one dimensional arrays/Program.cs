@@ -12,7 +12,7 @@ namespace Recursion_one_dimensional_arrays
         {
 
             int[] check = { -1, 34, 56 };
-            Console.WriteLine(SumPlus(check, check.Length-1));
+            Console.WriteLine(SumPlus(check));
 
 
 
@@ -40,7 +40,7 @@ namespace Recursion_one_dimensional_arrays
 
         public static int SumPlus(int[] arr)
         {
-            return SumArr(arr, arr.Length);
+            return SumPlus(arr, arr.Length-1);
         }
         public static int SumPlus(int[]arr,int i)
         {
@@ -61,7 +61,7 @@ namespace Recursion_one_dimensional_arrays
             if (arr[i] > 0)
             {
 
-                return 1 + SumArr(arr, i - 1);
+                return 1 + SumPlus(arr, i - 1);
             }
 
             
