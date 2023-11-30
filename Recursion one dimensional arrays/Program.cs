@@ -11,8 +11,8 @@ namespace Recursion_one_dimensional_arrays
         static void Main(string[] args)
         {
 
-            int[] check = { -1, 34, 56 };
-            Console.WriteLine(SumPlus(check));
+            int[] check = { 1, 1, 1 };
+            Console.WriteLine(allEqual(check));
 
 
 
@@ -22,27 +22,27 @@ namespace Recursion_one_dimensional_arrays
         }
         public static int SumArr(int[] arr)
         {
-            return SumArr(arr,arr.Length);
+            return SumArr(arr, arr.Length);
         }
 
 
-        public static int SumArr(int[] arr,int i)//הפעולה מקבלת מערך של מספרים שלמים arr ו אינדקס i שהוא התא האחרון במערך
+        public static int SumArr(int[] arr, int i)//הפעולה מקבלת מערך של מספרים שלמים arr ו אינדקס i שהוא התא האחרון במערך
         {
             if (i == 0)
             {
                 return arr[0];
 
             }
-            return arr[i]+SumArr(arr,i-1);
+            return arr[i] + SumArr(arr, i - 1);
         }
 
 
 
         public static int SumPlus(int[] arr)
         {
-            return SumPlus(arr, arr.Length-1);
+            return SumPlus(arr, arr.Length - 1);
         }
-        public static int SumPlus(int[]arr,int i)
+        public static int SumPlus(int[] arr, int i)
         {
 
             if (i == 0)
@@ -64,15 +64,65 @@ namespace Recursion_one_dimensional_arrays
                 return 1 + SumPlus(arr, i - 1);
             }
 
-            
-            return SumPlus(arr, i-1);
+
+            return SumPlus(arr, i - 1);
         }
 
+        public static bool numIn(int[] arr, int num)
+        {
+            return numIn(arr, arr.Length - 1, num);
+        }
 
+        public static bool numIn(int[] arr, int i, int num)
+        {
+            if (i == 0)
+            {
+                if (arr[i] == num)
+                {
+                    return true;
+                }
 
+                return false;
+            }
 
+            if (arr[i] == num)
+            {
+                return true;
+            }
 
+            return numIn(arr, i - 1, num);
+        }
 
+        public static bool allEqual(int[] arr)
+        {
+            return allEqual(arr, arr.Length - 1);
+        }
+
+        public static bool allEqual(int[] arr, int i)
+        {
+
+            if (i == 1)
+            {
+                if (arr[i] == arr[i-1])
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            if (arr[i] == arr[i-1])
+            {
+               
+                return numIn(arr, i - 1);
+            }
+            return false;
+        }
+
+        public int maxArr()
+        {
+
+        }
 
     }
 }
