@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,13 +12,12 @@ namespace Recursion_one_dimensional_arrays
         static void Main(string[] args)
         {
 
-            int[] check = { 1, 1, 1 };
-            Console.WriteLine(allEqual(check));
+            //int[] check = { 1, 1, 1, 3 };
+            //Console.WriteLine(maxArr(check));
 
-
-
-
-
+            int[] check = { 4, -8, 5, 6 };
+            Program program = new Program();
+            Console.WriteLine(program.IsSidra(check)); // cheack about that
 
         }
         public static int SumArr(int[] arr)
@@ -119,10 +119,79 @@ namespace Recursion_one_dimensional_arrays
             return false;
         }
 
-        public int maxArr()
-        {
 
+        public  int maxArr(int[] arr)
+        {
+            return maxArr(arr, arr.Length - 1);
+        }
+
+
+        public int maxArr(int[] arr, int i)
+        {
+            if (i == 0)
+            {
+                return arr[i];
+            }
+
+            int currentMax = arr[i];
+            int previousMax = maxArr(arr, i - 1);
+
+            if (currentMax > previousMax)
+            {
+                return currentMax;
+            }
+            else
+            {
+                return previousMax;
+            }
+        }
+
+
+        public bool IsSorted(int[] arr)
+        {
+            return IsSorted(arr, arr.Length - 1);
+        }
+
+        private bool IsSorted(int[] arr, int i)
+        {
+            if (i <= 0)
+            {
+                return true; // אם הגענו לתחילת המערך, הוא בהכרח ממוין
+            }
+
+            // בדיקה אם האיבר הנוכחי קטן או שווה לאיבר הקודם
+            if (arr[i] < arr[i - 1])
+            {
+                return false;
+            }
+
+            // המשך לבדוק את שאר המערך
+            return IsSorted(arr, i - 1);
+        }
+
+
+        public bool IsSidra(int[] arr)
+        {
+            return IsSidra(arr, arr.Length - 1);
+        }
+
+        public bool IsSidra(int[] arr, int i)
+        {
+            if (i <= 1)
+            {
+                return true; // אם הגענו לתחילת המערך או יש בו רק איבר אחד, הוא בהכרח מהווים סדרה חשבונית
+            }
+
+            // בדיקה אם ההפרש בין האיבר הנוכחי לבין האיבר הקודם שונה מההפרש הראשוני
+            if ((arr[i] - arr[i - 1]) != (arr[i - 1] - arr[i - 2]))
+            {
+                return false;
+            }
+
+            // המשך לבדוק את שאר המערך
+            return IsSidra(arr, i - 1);
         }
 
     }
 }
+
